@@ -12,3 +12,5 @@ Note that media and license will be stored in a subfolder called storage.
 docker-compose-traefik.yml is setup for my reverse proxy and can be started with following command.
 
 docker-compose -f docker-compose-traefik.yml up -d
+
+Please see official repo for details of the application. 
