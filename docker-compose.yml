@@ -1,0 +1,28 @@
+version: '3.1'
+
+services:
+  pisignage:
+    build:
+      context: ./build
+    container_name: pisignage
+    restart: unless-stopped
+    volumes:
+      - ./storage/licenses:/usr/src/app/data/licenses
+      - ./storage/sync_folders:/usr/src/app/data/sync_folders
+      - ./storage/media/:/usr/src/media
+    ports:
+      - 3000:3000
+    environment:
+      MONGO_URI: mongodb://mongodb/pisignage-server
+      NODE_ENV: docker
+
+  mongo:
+    image: mongo
+    container_name: mongodb
+    restart: unless-stopped
+    volumes:
+      - ./storage/mongodb:/data/db
+
+networks:
+  pisignage:
+    driver: bridge
