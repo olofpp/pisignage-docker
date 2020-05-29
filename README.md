@@ -5,7 +5,7 @@ Pisignage server for testing purpose.
 How to use.
 1. git clone https://github.com/olofpp/pisignage-docker.git
 2. cd pisignage-docker
-3. docker-compoe up -d
+3. docker-compose up -d
 
 Note that media and license will be stored in a subfolder called storage.
 
