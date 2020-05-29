@@ -7,9 +7,9 @@ services:
     container_name: pisignage
     restart: unless-stopped
     volumes:
-      - ./pisignage/licenses:/usr/src/app/data/licenses
-      - ./pisignage/sync_folders:/usr/src/app/data/sync_folders
-      - ./pisignage/media/:/usr/src/media
+      - ./storage/licenses:/usr/src/app/data/licenses
+      - ./storage/sync_folders:/usr/src/app/data/sync_folders
+      - ./storage/media/:/usr/src/media
     networks:
       - traefik
     environment:
@@ -31,9 +31,8 @@ services:
     restart: unless-stopped
     networks:
       - traefik
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - ./pisignage/mongodb:/data/db
+    volumes:    
+      - ./storage/mongodb:/data/db
 
 networks:
   traefik:
