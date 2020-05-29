@@ -8,6 +8,8 @@ How to use.
 3. docker-compose up -d
 4. Access site with http://localhost:3000
 
+Default username and password is pi/pi
+
 Note that media, mongodb and license will be stored in a subfolder called storage.
 
 docker-compose-traefik.yml is setup for my reverse proxy and can be started with following command.
