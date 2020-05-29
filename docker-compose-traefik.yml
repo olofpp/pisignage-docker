@@ -1,0 +1,40 @@
+version: "3.7"
+
+services:
+  pisignage:
+    build:
+      context: ./build
+    container_name: pisignage
+    restart: unless-stopped
+    volumes:
+      - ./pisignage/licenses:/usr/src/app/data/licenses
+      - ./pisignage/sync_folders:/usr/src/app/data/sync_folders
+      - ./pisignage/media/:/usr/src/media
+    networks:
+      - traefik
+    environment:
+      - MONGO_URI=mongodb://mongo/pisignage-server
+      - NODE_ENV=docker
+    labels:
+      - traefik.enable=true
+      - traefik.backend=pisignage
+      - traefik.http.services.pisignage.loadbalancer.server.port=3000
+      # SSL configuration
+      - traefik.http.routers.pisignage.entryPoints=https
+      - traefik.http.routers.pisignage.rule=host(`pisignage.${TRAEFIK_DOMAIN}`)
+      - traefik.http.routers.pisignage.tls=true
+      - traefik.http.routers.pisignage.tls.certResolver=le
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: unless-stopped
+    networks:
+      - traefik
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./pisignage/mongodb:/data/db
+
+networks:
+  traefik:
+    driver: bridge
