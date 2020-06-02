@@ -9,7 +9,7 @@ WORKDIR /pisignage/app
 
 RUN npm install
 
-COPY env.js config/env/docker.js
+COPY ./build/env.js config/env/docker.js
 
 ENV NODE_ENV docker
 ENV MONGO_URI mongodb://mongodb/pisignage-server
