@@ -11,6 +11,6 @@ node {
 
   // Deploy the new image
   stage('Deploy piSignage') {
-        sh "docker-compose up -d"
+        sh "docker-compose -f docker-compose-traefik.yml up -d"
   }
 }
